@@ -19,7 +19,10 @@ export const item: Variants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { ease: [0.22, 1, 0.36, 1], duration: 0.45 },
+    transition: {
+      ease: [0.22, 1, 0.36, 1],
+      duration: 0.45,
+    },
   },
 };
 
@@ -28,6 +31,10 @@ export const photoWrap: Variants = {
   show: {
     opacity: 1,
     scale: 1,
-    transition: { ease: [0.22, 1, 0.36, 1], duration: 0.7, delay: 0.2 },
+    transition: {
+      ease: [0.22, 1, 0.36, 1],
+      duration: 0.7,
+      delay: 0.2,
+    },
   },
 };

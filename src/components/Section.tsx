@@ -1,11 +1,17 @@
 import { motion } from "framer-motion";
 import { PropsWithChildren } from "react";
-import { container, item } from "../animations/variants";
+import {
+  container,
+  item,
+} from "../animations/variants";
 
-export function Section({ children, className = "" }: PropsWithChildren<{ className?: string }>) {
+export function Section({
+  children,
+  className = "",
+}: PropsWithChildren<{ className?: string }>) {
   return (
     <motion.section
-      className={`max-w-6xl mx-auto py-24 ${className}`}
+      className={`mx-auto max-w-6xl py-24 ${className}`}
       variants={container}
       initial="hidden"
       animate="show"

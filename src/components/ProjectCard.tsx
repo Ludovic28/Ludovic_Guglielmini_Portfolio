@@ -1,9 +1,19 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 // On définit d'abord les types de vidéos
-type YouTubeVideo = { type: "youtube"; src: string };
-type FileVideo = { type: "file"; src: string; poster?: string };
+type YouTubeVideo = {
+  type: "youtube";
+  src: string;
+};
+type FileVideo = {
+  type: "file";
+  src: string;
+  poster?: string;
+};
 
 // Union discriminée (soit l’un, soit l’autre)
 type Video = YouTubeVideo | FileVideo;
@@ -19,26 +29,38 @@ export type Project = {
   video?: Video; // ← optionnel
 };
 
-export default function ProjectCard({ p }: { p: Project }) {
+export default function ProjectCard({
+  p,
+}: {
+  p: Project;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
-    <article className="bg-slate-800/60 border border-white/10 rounded-xl overflow-hidden">
+    <article className="overflow-hidden rounded-xl border border-white/10 bg-slate-800/60">
       {p.image && (
-        <img src={p.image} alt={p.title} className="h-40 w-full object-cover" />
+        <img
+          src={p.image}
+          alt={p.title}
+          className="h-40 w-full object-cover"
+        />
       )}
 
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="text-lg font-semibold">{p.title}</h3>
+          <h3 className="text-lg font-semibold">
+            {p.title}
+          </h3>
           {p.video && (
             <button
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:bg-white/10 transition"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 transition hover:bg-white/10"
             >
               Voir la vidéo
               <motion.svg
-                animate={{ rotate: open ? 180 : 0 }}
+                animate={{
+                  rotate: open ? 180 : 0,
+                }}
                 transition={{ duration: 0.2 }}
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4"
@@ -55,13 +77,15 @@ export default function ProjectCard({ p }: { p: Project }) {
           )}
         </div>
 
-        <p className="text-slate-400 text-sm mt-2">{p.description}</p>
+        <p className="mt-2 text-sm text-slate-400">
+          {p.description}
+        </p>
 
         <div className="mt-3 flex flex-wrap gap-2">
           {p.tech.map((t) => (
             <span
               key={t}
-              className="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300"
+              className="rounded border border-white/10 bg-white/5 px-2 py-1 text-xs text-slate-300"
             >
               {t}
             </span>
@@ -73,7 +97,7 @@ export default function ProjectCard({ p }: { p: Project }) {
             <a
               href={p.link}
               target="_blank"
-              className="text-indigo-400 hover:text-indigo-300 text-sm font-medium"
+              className="text-sm font-medium text-indigo-400 hover:text-indigo-300"
             >
               Lien du site →
             </a>
@@ -82,7 +106,7 @@ export default function ProjectCard({ p }: { p: Project }) {
             <a
               href={p.repo}
               target="_blank"
-              className="text-slate-300 hover:text-white/90 text-sm"
+              className="text-sm text-slate-300 hover:text-white/90"
             >
               GitHub
             </a>
@@ -94,13 +118,19 @@ export default function ProjectCard({ p }: { p: Project }) {
           {open && p.video && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
+              animate={{
+                height: "auto",
+                opacity: 1,
+              }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.35,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="overflow-hidden"
             >
               <div className="mt-4 rounded-xl border border-white/10 bg-black/40 p-2">
-                <div className="relative w-full pt-[56.25%] rounded-lg overflow-hidden">
+                <div className="relative w-full overflow-hidden rounded-lg pt-[56.25%]">
                   {/* Si la vidéo est de type YouTube */}
                   {p.video.type === "youtube" && (
                     <iframe
